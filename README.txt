@@ -1,0 +1,1 @@
+Data of the Hebrew Letters is available at: https://tc11.cvc.uab.es/datasets/HHD_v0_1#
