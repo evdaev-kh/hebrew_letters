@@ -42,7 +42,7 @@ class_to_letter = {
 
 # Define the CNN model
 class MultiClassCNNModel(nn.Module):
-    def __init__(self, in_channels, num_classes, debug=False, dim_size=(32, 32)):
+    def __init__(self, num_classes, in_channels=3, debug=False, dim_size=(32, 32)):
         """ 
             CNN model using 2 Conv2D blocks with 2 max pool layers for multi-class classification
 
@@ -52,7 +52,7 @@ class MultiClassCNNModel(nn.Module):
                 debug:      a flag to debug some info about the outputs of each layer
                 dim_size:   the x and y dimension of the image (img size = X x Y x # channels)
         """
-        super(CNNModel, self).__init__()
+        super(MultiClassCNNModel, self).__init__()
         # Convolution 1
         self.cnn1 = nn.Conv2d(in_channels=in_channels, out_channels=16, kernel_size=3, stride=1, padding=1)
         self.relu1 = nn.ReLU()
@@ -65,8 +65,8 @@ class MultiClassCNNModel(nn.Module):
         self.maxpool2 = nn.MaxPool2d(kernel_size=3)
 
         # # Convolution 3
-        # self.cnn3 = nn.Conv2d(in_channels=32, out_channels=64, kernel_size=3, stride=1, padding=1)
-        # self.relu3 = nn.ReLU()
+        self.cnn3 = nn.Conv2d(in_channels=32, out_channels=64, kernel_size=3, stride=1, padding=1)
+        self.relu3 = nn.ReLU()
         # Max pool 2
         self.maxpool3 = nn.MaxPool2d(kernel_size=3)
         
@@ -142,7 +142,7 @@ if __name__ == "__main__":
     testing_dir = "./hhd_dataset/TEST"
 
     # Define the transformations for the images
-    transform = transforms.Compose([transforms.Resize((64, 64)),
+    transform = transforms.Compose([transforms.Resize((128, 128)),
                                     transforms.ToTensor(),
                                     transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
 
